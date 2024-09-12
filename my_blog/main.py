@@ -10,8 +10,8 @@ for post in posts:
     post_objects.append(post_obj)
 
 posts = requests.get("https://api.npoint.io/43644ec4f0013682fc0d").json()
-OWN_EMAIL = "alejopython@gmail.com"
-OWN_PASSWORD = "jokczgcpjzexgugw"
+OWN_EMAIL = YOUR EMAIL
+OWN_PASSWORD = YOUR PASSWORD
 
 
 
@@ -69,7 +69,7 @@ def send_email(name, email, phone, message):
     with smtplib.SMTP("smtp.gmail.com") as connection:
         connection.starttls()
         connection.login(OWN_EMAIL, OWN_PASSWORD)
-        connection.sendmail(OWN_EMAIL, "alejomh1994@gmail.com", email_message)
+        connection.sendmail(OWN_EMAIL, SENT TO EMAIL, email_message)
 
 
 if __name__ == "__main__":
