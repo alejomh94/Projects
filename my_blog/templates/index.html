@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+        <!-- Page Header-->
+{% include 'header.html' %}
+<!--    <header class="masthead" style="background-image: url('../static/assets/img/home-bg.jpg')"> You can use either option this is from local and the one below is from an url-->
+    <header class="masthead" style="background-image: url(https://images.unsplash.com/photo-1725638265979-4ff4b828ed5c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>Alejo's Blog</h1>
+                        <span class="subheading">A Blog Theme by Alejandro Marin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        {% for post in all_post %}
+                            <a href="{{ url_for('post', index=post.id) }}">
+                                <h2 class="post-title">{{ post.title }}</h2>
+                                <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+                            </a>
+                            <p class="post-meta">
+                                Posted by Alejandro Marin
+                                on September 24, 2023
+                            </p>
+                        {% endfor %}
+
+                    </div>
+                        <!-- Divider-->
+                            <hr class="my-4" />
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer-->
+        {% include 'footer.html' %}
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{{ jb_url }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </body>
+</html>
