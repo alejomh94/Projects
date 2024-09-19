@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Restaurants{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h1>All Cafes</h1>
+
+      <table class="table table-dark table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Cafe Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Open</th>
+            <th scope="col">Close</th>
+            <th scope="col">Coffee</th>
+            <th scope="col">Wifi</th>
+            <th scope="col">Power</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cafe in cafes %}
+          <tr>
+            <td>{{ cafe['Cafe Name'] }}</td>
+            <td>
+              {% if cafe['Location'][:4] == 'http' %}
+              <a href="{{ cafe['Location'] }}" target="_blank">Maps Link</a>
+              {% else %}
+              {{ cafe['Location'] }}
+              {% endif %}
+            </td>
+            <td>{{ cafe['Open'] }}</td>
+            <td>{{ cafe['Close'] }}</td>
+
+            <!-- Handle Coffee -->
+            <td>
+              {% if cafe['Coffee'].isdigit() %}
+                {{ {
+                  '0': '✘', '1': '☕️', '2': '☕️☕️', '3': '☕️☕️☕️', '4': '☕️☕️☕️☕️', '5': '☕️☕️☕️☕️☕️'
+                }[cafe['Coffee']] }}
+              {% else %}
+                {{ cafe['Coffee'] }}
+              {% endif %}
+            </td>
+
+            <!-- Handle Wifi -->
+            <td>
+              {% if cafe['Wifi'].isdigit() %}
+                {{ {
+                  '0': '✘', '1': '💪', '2': '💪💪', '3': '💪💪💪', '4': '💪💪💪💪', '5': '💪💪💪💪💪'
+                }[cafe['Wifi']] }}
+              {% else %}
+                {{ cafe['Wifi'] }}
+              {% endif %}
+            </td>
+
+            <!-- Handle Power -->
+            <td>
+              {% if cafe['Power'].isdigit() %}
+                {{ {
+                  '0': '✘', '1': '🔌', '2': '🔌🔌', '3': '🔌🔌🔌', '4': '🔌🔌🔌🔌', '5': '🔌🔌🔌🔌🔌'
+                }[cafe['Power']] }}
+              {% else %}
+                {{ cafe['Power'] }}
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <p><a href="{{ url_for('home') }}">Return to index page</a></p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
