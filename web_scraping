@@ -1,0 +1,83 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+from datetime import datetime, timedelta
+
+user_name = "jeff.park@verizonwireless.com"
+password = "Sdp860609!"
+
+url = "https://idsrv.kroger.m6demandview.com/account/mk6signin"
+
+edge_options = webdriver.EdgeOptions()
+edge_options.add_experimental_option("detach", True)
+
+driver = webdriver.Edge(options=edge_options)
+
+driver.get(url)
+##sign in
+driver.find_element(By.NAME, value="UserName").send_keys(user_name)
+driver.find_element(By.NAME, value="Password").send_keys(password)
+# driver.find_element(By.LINK_TEXT, value="Login").click()
+driver.find_element(By.XPATH, value='//*[@id="content"]/div/div/div[2]/form/p[4]/input').click()
+
+##find sales
+time.sleep(10)
+driver.find_element(By.XPATH, value='//*[@id="reportLibraryContainer"]/div[2]/div/ul[2]/li[4]/a').click()
+##Load sales
+time.sleep(2)
+driver.find_element(By.XPATH, value='//*[@id="reportLibraryContainer"]/div[3]/div/div/div/button[1]').click()
+
+# time.sleep(2)
+# driver.find_element(By.XPATH, value='').click()
+
+time.sleep(2)
+driver.find_element(By.XPATH, value='//*[@id="checkAllDivisions"]').click()
+driver.find_element(By.XPATH, value='//*[@id="datesTab"]').click()
+driver.find_element(By.XPATH, value='//*[@id="radFiscalWeeks"]').click()
+driver.find_element(By.XPATH, value='//*[@id="weekQuickPick"]').click()
+driver.find_element(By.XPATH, value='//*[@id="startingPointAggregateTab"]').click()
+driver.find_element(By.XPATH, value='//*[@id="tabStartingPointAggregate"]/div/div[3]/div/div/div[2]/label/input').click()
+driver.find_element(By.XPATH, value='//*[@id="tabStartingPointAggregate"]/div/div[3]/div[2]/div/div[2]/div/label[2]/input').click()
+driver.find_element(By.XPATH, value='//*[@id="tabStartingPointAggregate"]/div/div[3]/div[3]/div/div[2]/div/label[2]/input').click()
+driver.find_element(By.XPATH, value='//*[@id="runTab"]').click()
+
+time.sleep(20)
+driver.find_element(By.XPATH, value='//*[@id="reportExport"]').click()
+driver.find_element(By.XPATH, value='//*[@id="exporttypeset"]/label[2]/span/span').click()
+driver.find_element(By.XPATH, value='//*[@id="btnExportToCSV_CD"]/span').click()
+
+##Get inventory
+
+driver.find_element(By.XPATH, value='//*[@id="headerHome"]').click()
+time.sleep(2)
+driver.find_element(By.XPATH, value='//*[@id="reportLibraryContainer"]/div[2]/div/ul[3]/li[10]/a').click()
+driver.find_element(By.XPATH, value='//*[@id="reportLibraryContainer"]/div[3]/div/div/div/button[1]').click()
+time.sleep(2)
+driver.find_element(By.XPATH, value='//*[@id="daysTab"]').click()
+
+today = datetime.now()
+saturday = datetime.now() - timedelta(days=3)
+
+formatted_date = saturday.strftime("%m/%d/%Y")
+
+print(formatted_date)
+
+driver.find_element(By.XPATH, value='//*[@id="beginningDatePicker"]').send_keys(formatted_date)
+driver.find_element(By.XPATH, value='//*[@id="endingDatePicker"]').send_keys(formatted_date)
+driver.find_element(By.XPATH, value='//*[@id="startingPointTab"]').click()
+driver.find_element(By.XPATH, value='//*[@id="primaryDepartmentSelector"]/option[2]').click()
+driver.find_element(By.XPATH, value='//*[@id="recapDepartmentSelector"]/option[3]').click()
+driver.find_element(By.XPATH, value='//*[@id="departmentSelector"]/option[3]').click()
+driver.find_element(By.XPATH, value='//*[@id="runTab"]').click()
+time.sleep(20)
+driver.find_element(By.XPATH, value='//*[@id="reportExport"]').click()
+time.sleep(5)
+driver.find_element(By.XPATH, value='//*[@id="exporttypeset"]/label[2]').click()
+time.sleep(5)
+
+driver.find_element(By.XPATH, value='//*[@id="btnExportToCSV_CD"]').click()
+
+
+time.sleep(10)
+driver.quit()
+
