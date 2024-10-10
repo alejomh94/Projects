@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 user_name = "email"
 password = "password"
 
-url = "https://idsrv.kroger.m6demandview.com/account/mk6signin"
+url = "YOUR URL"
 
 edge_options = webdriver.EdgeOptions()
 edge_options.add_experimental_option("detach", True)
