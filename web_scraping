@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 import time
 from datetime import datetime, timedelta
 
-user_name = "jeff.park@verizonwireless.com"
-password = "Sdp860609!"
+user_name = "email"
+password = "password"
 
 url = "https://idsrv.kroger.m6demandview.com/account/mk6signin"
 
